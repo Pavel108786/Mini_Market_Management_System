@@ -1,5 +1,4 @@
 # Mini_Market_Management_System
-# Mini Market Management System 🛒
 
 A professional desktop application designed to streamline wholesale operations and manage inventory. This system is specifically built for B2B transactions between wholesalers and sellers.
 
