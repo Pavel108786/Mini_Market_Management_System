@@ -102,8 +102,7 @@ namespace Mini_Market_Management_System
                                         //    MessageBox.Show("Wrong Username or Password", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         //}
 
-                     SqlCommand cmd = new SqlCommand("SELECT * FROM Seller WHERE SellerName=@name AND SellerPass=@pass",
-                    dBCon.GetCon());
+                     SqlCommand cmd = new SqlCommand("SELECT * FROM Seller WHERE SellerName=@name AND SellerPass=@pass",dBCon.GetCon());
 
                     cmd.Parameters.AddWithValue("@name", TextBox_username.Text);
                     cmd.Parameters.AddWithValue("@pass", TextBox_password.Text);
