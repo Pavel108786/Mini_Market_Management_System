@@ -82,13 +82,39 @@ namespace Mini_Market_Management_System
                     }
                     else
                     {
-                        string selectQuery = "SELECT * FROM Seller WHERE SellerName ='" + TextBox_username.Text + "' AND SellerPass='" + TextBox_password.Text + "'  ";
+                        // string selectQuery = "SELECT * FROM Seller WHERE SellerName ='" + TextBox_username.Text + "' AND SellerPass='" + TextBox_password.Text + "'  ";
 
-                        SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, dBCon.GetCon());
 
+                        //SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, dBCon.GetCon());
+
+                        //DataTable table = new DataTable();
+
+                        //adapter.Fill(table);
+                        //if (table.Rows.Count > 0)
+                        //{
+                        //    sellerName = TextBox_username.Text;
+                        //    SellingForm selling = new SellingForm();
+                        //    selling.Show();
+                        //    this.Hide();
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Wrong Username or Password", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //}
+
+
+
+                        SqlCommand cmd = new SqlCommand("SELECT * FROM Seller WHERE SellerName=@name AND SellerPass=@pass",
+dBCon.GetCon());
+
+                        cmd.Parameters.AddWithValue("@name", TextBox_username.Text);
+                        cmd.Parameters.AddWithValue("@pass", TextBox_password.Text);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
 
                         adapter.Fill(table);
+
                         if (table.Rows.Count > 0)
                         {
                             sellerName = TextBox_username.Text;
