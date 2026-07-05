@@ -9,8 +9,10 @@ namespace Mini_Market_Management_System
 {
     internal class DBConnect
     {
-        private SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Hp\OneDrive\文档\Marketdb.mdf;Integrated Security=True;Connect Timeout=30");
-        
+        private SqlConnection connection = new SqlConnection(
+@"Data Source=(LocalDB)\MSSQLLocalDB;
+AttachDbFilename=C:\Users\Hp\source\repos\Mini_Market_Management_System\Mini_Market_Management_System\Marketdb.mdf;
+Integrated Security=True");
         public SqlConnection GetCon()
         {
             return connection;

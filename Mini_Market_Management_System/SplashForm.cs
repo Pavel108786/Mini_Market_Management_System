@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Mini_Market_Management_System
 {
@@ -40,9 +42,28 @@ private void SplashForm_Load_1(object sender,EventArgs e)
             {
                 ProgressBar.Value = 0;
                 timer1.Stop();
-                LoginForm loginform = new LoginForm();
+                DBConnect db = new DBConnect();
+
+                db.OpenCon();
+
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM AdminTbl", db.GetCon());
+
+                int count = (int)cmd.ExecuteScalar();
+
+                db.CloseCon();
+
                 this.Hide();
-                loginform.Show();
+
+                if (count == 0)
+                {
+                    SignupForm signup = new SignupForm();
+                    signup.Show();
+                }
+                else
+                {
+                    LoginForm login = new LoginForm();
+                    login.Show();
+                }
             }
         }
 

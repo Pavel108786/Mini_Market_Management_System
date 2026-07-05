@@ -68,7 +68,19 @@ namespace Mini_Market_Management_System
 
                     if (comboBox_role.SelectedItem.ToString() == "ADMIN")
                     {
-                        if (TextBox_username.Text == "Admin" && TextBox_password.Text == "admin69")
+                        SqlCommand cmd = new SqlCommand(
+     "SELECT * FROM AdminTbl WHERE AdminName=@name AND AdminPass=@pass",
+     dBCon.GetCon());
+
+                        cmd.Parameters.AddWithValue("@name", TextBox_username.Text);
+                        cmd.Parameters.AddWithValue("@pass", TextBox_password.Text);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable table = new DataTable();
+
+                        adapter.Fill(table);
+
+                        if (table.Rows.Count > 0)
                         {
                             ProductForm product = new ProductForm();
                             product.Show();
@@ -76,7 +88,7 @@ namespace Mini_Market_Management_System
                         }
                         else
                         {
-                            MessageBox.Show("If You are Admin ,Please Select Admin and Correct the Username & Password ", "Invalid Username or Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Invalid Admin Username or Password");
                         }
 
                     }
@@ -149,5 +161,40 @@ namespace Mini_Market_Management_System
         {
 
         }
+
+        private void Label_admin_MouseEnter(object sender, EventArgs e)
+        {
+            Label_admin.ForeColor = Color.Blue;
+        }
+
+        private void Label_admin_MouseLeave(object sender, EventArgs e)
+        {
+            Label_admin.ForeColor = Color.DarkOliveGreen;
+        }
+
+        private void Label_admin_Click(object sender, EventArgs e)
+        {
+            DBConnect db = new DBConnect();
+            db.OpenCon();
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM AdminTbl", db.GetCon());
+
+            int count = (int)cmd.ExecuteScalar();
+
+            db.CloseCon();
+
+            if (count == 0)
+            {
+                SignupForm signup = new SignupForm();
+                signup.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Admin account already exists.");
+            }
+        }
+
+        
     }
 }

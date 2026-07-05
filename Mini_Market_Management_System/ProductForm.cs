@@ -266,6 +266,11 @@ namespace Mini_Market_Management_System
 
         }
 
+        private void button_selling_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
